@@ -1,4 +1,4 @@
-import 'package:dogs_images/Features/dogs_breed/presentation/view/widgets/Dogs_breed_body_widget.dart';
+import 'package:dogs_images/Features/dogs_breed/presentation/view/widgets/dogs_breed_body_widget.dart';
 import 'package:flutter/material.dart';
 
 class DogBreedsScreen extends StatelessWidget {

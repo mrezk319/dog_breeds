@@ -1,4 +1,3 @@
-// ignore: must_be_immutable
 import 'package:dogs_images/Core/utils/styles.dart';
 import 'package:dogs_images/Features/dogs_breed/presentation/view/widgets/custom_crop_down_shimmer.dart';
 import 'package:dogs_images/Features/dogs_breed/presentation/view/widgets/custom_drop_down.dart';

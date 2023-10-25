@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -11,6 +13,7 @@ class ImageZoomScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(img);
     return Scaffold(
       body: PhotoViewGallery.builder(
         itemCount: 1,

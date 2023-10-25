@@ -9,7 +9,7 @@ class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      title: Text("dogs_images", style: Styles.textStyle),
+      title: Text("Dog Breeds", style: Styles.textStyle),
       pinned: true,
       elevation: 0,
       backgroundColor: Colors.white,

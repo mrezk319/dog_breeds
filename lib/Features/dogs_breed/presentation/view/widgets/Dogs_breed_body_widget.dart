@@ -1,3 +1,5 @@
+import 'package:dogs_images/Core/utils/service_locator.dart';
+import 'package:dogs_images/Features/dogs_breed/data/repos/dogs_breed_repo_impl.dart';
 import 'package:dogs_images/Features/dogs_breed/presentation/view/widgets/app_bar_widget.dart';
 import 'package:dogs_images/Features/dogs_breed/presentation/view/widgets/breed_and_sub_buttons_widget.dart';
 import 'package:dogs_images/Features/dogs_breed/presentation/view/widgets/breed_buttons_widget.dart';
@@ -26,64 +28,68 @@ class _DogBreedsBodyState extends State<DogBreedsBody> {
   @override
   Widget build(BuildContext context) {
     //var mediaQuery = MediaQuery.of(context);
-    return CustomScrollView(
-      slivers: [
-        const AppBarWidget(),
-        SliverToBoxAdapter(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              ChooseBreedWidget(
-                  breedNameController: breedNameController, name: "Breed"),
-              const SizedBox(
-                height: 10,
-              ),
-              ChooseSubBreedWidget(
-                  subBreedNameController: subBreedNameController,
-                  name: "Sub Breed"),
-              const SizedBox(
-                height: 25,
-              ),
-              BreedButtons(breedNameController: breedNameController),
-              const SizedBox(
-                height: 20,
-              ),
-              BreedAndSubBreedButtons(
-                  breedNameController: breedNameController,
-                  subBreedNameController: subBreedNameController),
-              const SizedBox(height: 20),
-              BlocBuilder<DogBreedsCubit, DogBreedsState>(
-                builder: (context, state) {
-                  if (state is ImagesByBreedAndSubBreedLoading ||
-                      state is ImagesByBreedLoading ||
-                      state is RandomImageByBreedAndSubBreedLoading ||
-                      state is RandomImageByBreedLoading) {
-                    return const ShimmerImages();
-                  } else if (state is ImagesByBreedAndSubBreedFail ||
-                      state is ImagesByBreedFail ||
-                      state is RandomImageByBreedAndSubBreedFail ||
-                      state is RandomImageByBreedFail) {
-                    return const Center(
-                      child: Text("Failed get image"),
-                    );
-                  } else {
-                    if (state is RandomImageByBreedAndSubBreedSuccess ||
-                        state is RandomImageByBreedSuccess) {
-                      return const ImageRandWidget();
-                    } else if (state is ImagesByBreedAndSubBreedSuccess ||
-                        state is ImagesByBreedSuccess) {
-                      return const ImagesGridWidget();
+    return BlocProvider(
+      create: (context) =>
+          DogBreedsCubit(getIt.get<DogBreedsRepoImpl>())..getBreedsList(),
+      child: CustomScrollView(
+        slivers: [
+          const AppBarWidget(),
+          SliverToBoxAdapter(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                ChooseBreedWidget(
+                    breedNameController: breedNameController, name: "Breed"),
+                const SizedBox(
+                  height: 10,
+                ),
+                ChooseSubBreedWidget(
+                    subBreedNameController: subBreedNameController,
+                    name: "Sub Breed"),
+                const SizedBox(
+                  height: 25,
+                ),
+                BreedButtons(breedNameController: breedNameController),
+                const SizedBox(
+                  height: 20,
+                ),
+                BreedAndSubBreedButtons(
+                    breedNameController: breedNameController,
+                    subBreedNameController: subBreedNameController),
+                const SizedBox(height: 20),
+                BlocBuilder<DogBreedsCubit, DogBreedsState>(
+                  builder: (context, state) {
+                    if (state is ImagesByBreedAndSubBreedLoading ||
+                        state is ImagesByBreedLoading ||
+                        state is RandomImageByBreedAndSubBreedLoading ||
+                        state is RandomImageByBreedLoading) {
+                      return const ShimmerImages();
+                    } else if (state is ImagesByBreedAndSubBreedFail ||
+                        state is ImagesByBreedFail ||
+                        state is RandomImageByBreedAndSubBreedFail ||
+                        state is RandomImageByBreedFail) {
+                      return const Center(
+                        child: Text("Failed get image"),
+                      );
                     } else {
-                      return const SizedBox();
+                      if (state is RandomImageByBreedAndSubBreedSuccess ||
+                          state is RandomImageByBreedSuccess) {
+                        return const ImageRandWidget();
+                      } else if (state is ImagesByBreedAndSubBreedSuccess ||
+                          state is ImagesByBreedSuccess) {
+                        return const ImagesGridWidget();
+                      } else {
+                        return const SizedBox();
+                      }
                     }
-                  }
-                },
-              ),
-            ],
-          ),
-        ))
-      ],
+                  },
+                ),
+              ],
+            ),
+          ))
+        ],
+      ),
     );
   }
 }
