@@ -78,9 +78,15 @@ void main() {
 }
 
 void expectRandImage(result, Right<dynamic, String> right) {
-  expect(result, right.value);
+  expect(result.contains("http") ? result : false, right.value);
 }
 
 void expectListImages(result, Right<dynamic, List<String>> right) {
-  expect(result, right.value);
+  expect(
+      result.isEmpty
+          ? false
+          : right.value[0].contains("http")
+              ? result
+              : false,
+      right.value);
 }
