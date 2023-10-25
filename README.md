@@ -6,10 +6,10 @@ I implemented the MVVM architectural pattern, utilized Dio for API calls, BloC f
 
 Implemented Functions:
 
-Random image by breed
-Images list by breed
-Random image by breed and sub-breed
-Images list by breed and sub-breed
+Random image by breed.
+Images list by breed.
+Random image by breed and sub-breed.
+Images list by breed and sub-breed.
 
 How to Use:
 
